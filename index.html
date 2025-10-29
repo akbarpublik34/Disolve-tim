@@ -3,16 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Medical Case Repository</title>
+    <link rel="stylesheet" href="./assets/css/mainStyle.css">
 </head>
 <body>
-    <header> 
-        <h1>Medical Case Repository</h1>
-        <a href="pages/addCase.html" class="btn"> Add a New Medical Case</a>
+    <header class="main-header">
+        <div class="container">
+            <h1>Medical Case Repository</h1>
+            <nav>
+                <a href="index.html" class="active">Dashboard</a>
+                <a href="./pages/addCase.html">Add Case</a>
+                <a href="#" id="aboutLink">About</a>
+            </nav>
+        </div>
     </header>
 
-    <section id="caseList"></section>
-    
-    <script src="assets/js/mainScripts.js"></script>
+    <main class="container">
+        <section class="hero">
+            <h2>Welcome to the Medical Case Repository</h2>
+            <p>Store, manage, and update medical case reports securely</p>
+        </section>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <h3 id="totalCases">0</h3>
+                <p>Total Cases</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="recentCases">0</h3>
+                <p>Recent Cases</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="activeCases">0</h3>
+                <p>Active Cases</p>
+            </div>
+        </section>
+
+        <section class="cases-section">
+            <div class="section-header">
+                <h2>Recent Cases</h2>
+                <input type="text" id="searchInput" placeholder="Search cases..." class="search-input">
+            </div>
+            <div id="casesList" class="cases-grid"></div>
+        </section>
+    </main>
+
+    <script src="./assets/js/mainScript.js"></script>
 </body>
 </html>
