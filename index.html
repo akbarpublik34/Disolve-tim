@@ -1,53 +1,224 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical Case Repository</title>
+    <title>JKN Medical Case Repository - Dashboard</title>
     <link rel="stylesheet" href="./assets/css/mainStyle.css">
+    <link rel="stylesheet" href="./assets/css/dashboard.css">
 </head>
 <body>
+    <!-- Top Navigation -->
     <header class="main-header">
         <div class="container">
-            <h1>Medical Case Repository</h1>
-            <nav>
+            <div class="logo-section">
+                <h1>🏥 JKN Medical Hub</h1>
+                <span class="version-badge">v2.0 Beta</span>
+            </div>
+            <nav class="main-nav">
                 <a href="index.html" class="active">Dashboard</a>
-                <a href="./pages/addCase.html">Add Case</a>
-                <a href="#" id="aboutLink">About</a>
+                <a href="./pages/queue.html">Antrean</a>
+                <a href="./pages/claims.html">Klaim</a>
+                <a href="./pages/addCase.html">+ Tambah Kasus</a>
+                <a href="./pages/analytics.html">Analitik</a>
+                <a href="./pages/gamification.html">🎮 Poin</a>
             </nav>
+            <div class="user-section">
+                <div class="notification-bell" id="notifBell">
+                    <span class="bell-icon">🔔</span>
+                    <span class="notification-badge" id="notifCount">3</span>
+                </div>
+                <div class="user-profile">
+                    <img src="./assets/img/default-avatar.png" alt="User" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%232563eb%22/%3E%3Ctext x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2240%22 font-family=%22Arial%22%3EDR%3C/text%3E%3C/svg%3E'">
+                    <span class="user-name">dr. User</span>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main class="container">
-        <section class="hero">
-            <h2>Welcome to the Medical Case Repository</h2>
-            <p>Store, manage, and update medical case reports securely</p>
+    <!-- Quick Stats Section -->
+    <section class="quick-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card stat-primary">
+                    <div class="stat-icon">📋</div>
+                    <div class="stat-content">
+                        <h3 id="totalCases">0</h3>
+                        <p>Total Kasus</p>
+                        <span class="stat-trend up">+12% bulan ini</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-success">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-content">
+                        <h3 id="activeCases">0</h3>
+                        <p>Kasus Aktif</p>
+                        <span class="stat-trend">Membutuhkan tindakan</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-warning">
+                    <div class="stat-icon">⏰</div>
+                    <div class="stat-content">
+                        <h3 id="queueCount">0</h3>
+                        <p>Antrean Hari Ini</p>
+                        <span class="stat-trend">Lihat jadwal</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-info">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-content">
+                        <h3 id="claimsPending">0</h3>
+                        <p>Klaim Tertunda</p>
+                        <span class="stat-trend">Proses otomatis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="container main-content">
+        <!-- Filter & Search Section -->
+        <section class="controls-section">
+            <div class="search-filter-bar">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" placeholder="Cari pasien, diagnosis, No. JKN...">
+                </div>
+                <div class="filter-controls">
+                    <select id="statusFilter" class="filter-select">
+                        <option value="">Semua Status</option>
+                        <option value="active">Aktif</option>
+                        <option value="closed">Selesai</option>
+                        <option value="pending">Menunggu</option>
+                    </select>
+                    <select id="dateFilter" class="filter-select">
+                        <option value="all">Semua Waktu</option>
+                        <option value="today">Hari Ini</option>
+                        <option value="week">Minggu Ini</option>
+                        <option value="month">Bulan Ini</option>
+                    </select>
+                    <button class="btn-filter" id="advancedFilter">
+                        <span>⚙️</span> Filter Lanjutan
+                    </button>
+                    <button class="btn-export" id="exportBtn">
+                        <span>📥</span> Export Data
+                    </button>
+                </div>
+            </div>
         </section>
 
-        <section class="stats-grid">
-            <div class="stat-card">
-                <h3 id="totalCases">0</h3>
-                <p>Total Cases</p>
-            </div>
-            <div class="stat-card">
-                <h3 id="recentCases">0</h3>
-                <p>Recent Cases</p>
-            </div>
-            <div class="stat-card">
-                <h3 id="activeCases">0</h3>
-                <p>Active Cases</p>
+        <!-- Quick Actions -->
+        <section class="quick-actions">
+            <h2>Aksi Cepat</h2>
+            <div class="actions-grid">
+                <a href="./pages/addCase.html" class="action-card">
+                    <div class="action-icon">➕</div>
+                    <h3>Tambah Kasus Baru</h3>
+                    <p>Daftarkan pasien dan kasus medis</p>
+                </a>
+                <a href="./pages/queue.html" class="action-card">
+                    <div class="action-icon">📅</div>
+                    <h3>Kelola Antrean</h3>
+                    <p>Atur jadwal dan antrean pasien</p>
+                </a>
+                <a href="./pages/claims.html" class="action-card">
+                    <div class="action-icon">🤖</div>
+                    <h3>Proses Klaim Otomatis</h3>
+                    <p>Submit dan tracking klaim JKN</p>
+                </a>
+                <a href="./pages/analytics.html" class="action-card">
+                    <div class="action-icon">📊</div>
+                    <h3>Lihat Analitik</h3>
+                    <p>Dashboard dan laporan lengkap</p>
+                </a>
             </div>
         </section>
 
+        <!-- Cases List -->
         <section class="cases-section">
             <div class="section-header">
-                <h2>Recent Cases</h2>
-                <input type="text" id="searchInput" placeholder="Search cases..." class="search-input">
+                <h2>Daftar Kasus Terbaru</h2>
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="grid">
+                        <span>⊞</span> Grid
+                    </button>
+                    <button class="view-btn" data-view="list">
+                        <span>☰</span> List
+                    </button>
+                </div>
             </div>
             <div id="casesList" class="cases-grid"></div>
+            <div class="pagination" id="pagination"></div>
+        </section>
+
+        <!-- Recent Activity -->
+        <section class="activity-section">
+            <h2>Aktivitas Terbaru</h2>
+            <div class="activity-feed" id="activityFeed">
+                <!-- Will be populated by JS -->
+            </div>
         </section>
     </main>
 
+    <!-- Notification Panel -->
+    <div class="notification-panel" id="notificationPanel">
+        <div class="panel-header">
+            <h3>Notifikasi</h3>
+            <button class="close-panel">✕</button>
+        </div>
+        <div class="notifications-list" id="notificationsList">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
+    <!-- Advanced Filter Modal -->
+    <div class="modal" id="advancedFilterModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Filter Lanjutan</h3>
+                <button class="close-modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="filter-group">
+                    <label>Rentang Usia</label>
+                    <div class="range-inputs">
+                        <input type="number" placeholder="Min" id="ageMin">
+                        <span>-</span>
+                        <input type="number" placeholder="Max" id="ageMax">
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label>Jenis Kelamin</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" value="Male"> Laki-laki</label>
+                        <label><input type="checkbox" value="Female"> Perempuan</label>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label>Diagnosis</label>
+                    <input type="text" placeholder="Cari diagnosis..." id="diagnosisFilter">
+                </div>
+                <div class="filter-group">
+                    <label>Prioritas Klaim</label>
+                    <select id="claimPriority">
+                        <option value="">Semua</option>
+                        <option value="high">Tinggi</option>
+                        <option value="medium">Sedang</option>
+                        <option value="low">Rendah</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="resetFilters">Reset</button>
+                <button class="btn btn-primary" id="applyFilters">Terapkan Filter</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/js/storageHelper.js"></script>
     <script src="./assets/js/mainScript.js"></script>
+    <script src="./assets/js/dashboard.js"></script>
+    <script src="./assets/js/notifications.js"></script>
 </body>
 </html>
