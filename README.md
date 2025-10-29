@@ -167,7 +167,7 @@ Free to use for personal or commercial purposes.
 
 ## 👨‍⚕️ Author
 
-**Your Name**  
+  
 *Medical Case Repository Developer*  
 
 ---
