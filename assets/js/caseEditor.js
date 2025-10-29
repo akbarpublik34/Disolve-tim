@@ -1,23 +1,22 @@
-// Handle Add Case Form
 document.addEventListener('DOMContentLoaded', function() {
-    const addCaseForm = document.getElementById('addCaseForm');
-    const editCaseForm = document.getElementById('editCaseForm');
+    const addForm = document.getElementById('addCaseForm');
+    const editForm = document.getElementById('editCaseForm');
     
-    if (addCaseForm) {
-        addCaseForm.addEventListener('submit', handleAddCase);
+    if (addForm) {
+        addForm.addEventListener('submit', handleAddCase);
     }
     
-    if (editCaseForm) {
+    if (editForm) {
         loadCaseForEdit();
-        editCaseForm.addEventListener('submit', handleEditCase);
+        editForm.addEventListener('submit', handleEditCase);
     }
 });
 
-// Add new case
+// Add Case
 function handleAddCase(e) {
     e.preventDefault();
-    
     const formData = new FormData(e.target);
+    
     const caseData = {
         patientName: formData.get('patientName'),
         patientAge: parseInt(formData.get('patientAge')),
@@ -26,63 +25,52 @@ function handleAddCase(e) {
         description: formData.get('description'),
         treatment: formData.get('treatment') || '',
         notes: formData.get('notes') || '',
-        status: formData.get('status')
+        status: formData.get('status'),
+        priority: 'medium'
     };
     
-    // Validate required fields
-    if (!caseData.patientName || !caseData.patientAge || !caseData.patientGender || 
-        !caseData.diagnosis || !caseData.description || !caseData.status) {
-        alert('Please fill in all required fields');
-        return;
-    }
-    
-    // Save the case
-    window.medicalRepo.storage.addCase(caseData);
-    
-    // Redirect to dashboard
-    alert('Case added successfully!');
+    StorageHelper.addCase(caseData);
+    alert('Kasus berhasil ditambahkan!');
     window.location.href = '../index.html';
 }
 
-// Load case data for editing
+// Load for Edit
 function loadCaseForEdit() {
     const urlParams = new URLSearchParams(window.location.search);
     const caseId = urlParams.get('id');
     
     if (!caseId) {
-        alert('No case ID provided');
+        alert('ID kasus tidak ditemukan');
         window.location.href = '../index.html';
         return;
     }
     
-    const caseData = window.medicalRepo.storage.getCase(caseId);
+    const caseData = StorageHelper.getCase(caseId);
     
     if (!caseData) {
-        alert('Case not found');
+        alert('Kasus tidak ditemukan');
         window.location.href = '../index.html';
         return;
     }
     
-    // Populate form fields
-    document.getElementById('patientName').value = caseData.patientName;
-    document.getElementById('patientAge').value = caseData.patientAge;
-    document.getElementById('patientGender').value = caseData.patientGender;
-    document.getElementById('diagnosis').value = caseData.diagnosis;
-    document.getElementById('description').value = caseData.description;
-    document.getElementById('treatment').value = caseData.treatment || '';
-    document.getElementById('notes').value = caseData.notes || '';
-    document.getElementById('status').value = caseData.status;
+    // Populate form
+    document.querySelector('[name="patientName"]').value = caseData.patientName;
+    document.querySelector('[name="patientAge"]').value = caseData.patientAge;
+    document.querySelector('[name="patientGender"]').value = caseData.patientGender;
+    document.querySelector('[name="diagnosis"]').value = caseData.diagnosis;
+    document.querySelector('[name="description"]').value = caseData.description;
+    document.querySelector('[name="treatment"]').value = caseData.treatment || '';
+    document.querySelector('[name="notes"]').value = caseData.notes || '';
+    document.querySelector('[name="status"]').value = caseData.status;
     
-    // Store case ID for update
     document.getElementById('editCaseForm').dataset.caseId = caseId;
 }
 
-// Update existing case
+// Update Case
 function handleEditCase(e) {
     e.preventDefault();
-    
-    const formData = new FormData(e.target);
     const caseId = e.target.dataset.caseId;
+    const formData = new FormData(e.target);
     
     const updatedData = {
         patientName: formData.get('patientName'),
@@ -95,17 +83,7 @@ function handleEditCase(e) {
         status: formData.get('status')
     };
     
-    // Validate required fields
-    if (!updatedData.patientName || !updatedData.patientAge || !updatedData.patientGender || 
-        !updatedData.diagnosis || !updatedData.description || !updatedData.status) {
-        alert('Please fill in all required fields');
-        return;
-    }
-    
-    // Update the case
-    window.medicalRepo.storage.updateCase(caseId, updatedData);
-    
-    // Redirect to view page
-    alert('Case updated successfully!');
+    StorageHelper.updateCase(caseId, updatedData);
+    alert('Kasus berhasil diperbarui!');
     window.location.href = `viewCase.html?id=${caseId}`;
 }

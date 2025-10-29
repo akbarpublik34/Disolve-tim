@@ -4,37 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JKN Medical Case Repository - Dashboard</title>
-    <link rel="stylesheet" href="./assets/css/mainStyle.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
     <link rel="stylesheet" href="./assets/css/dashboard.css">
 </head>
 <body>
     <!-- Top Navigation -->
     <header class="main-header">
-        <div class="container">
-            <div class="logo-section">
-                <h1>🏥 JKN Medical Hub</h1>
-                <span class="version-badge">v2.0 Beta</span>
+    <div class="container">
+        <div class="logo-section">
+            <h1>JKN Medical Hub</h1>
+            <span class="version-badge">v2.0</span>
+        </div>
+        <nav class="main-nav">
+            <a href="/" id="nav-dashboard">Dashboard</a>
+            <a href="/pages/addCase.html" id="nav-addcase">Tambah Kasus</a>
+            <a href="/pages/queue.html" id="nav-queue">Antrean</a>
+            <a href="/pages/claims.html" id="nav-claims">Klaim</a>
+            <a href="/pages/analytics.html" id="nav-analytics">Analitik</a>
+        </nav>
+        <div class="user-section">
+            <div class="notification-bell" id="notifBell">
+                <span>🔔</span>
+                <span class="notification-badge" id="notifCount">0</span>
             </div>
-            <nav class="main-nav">
-                <a href="index.html" class="active">Dashboard</a>
-                <a href="./pages/queue.html">Antrean</a>
-                <a href="./pages/claims.html">Klaim</a>
-                <a href="./pages/addCase.html">+ Tambah Kasus</a>
-                <a href="./pages/analytics.html">Analitik</a>
-                <a href="./pages/gamification.html">🎮 Poin</a>
-            </nav>
-            <div class="user-section">
-                <div class="notification-bell" id="notifBell">
-                    <span class="bell-icon">🔔</span>
-                    <span class="notification-badge" id="notifCount">3</span>
-                </div>
-                <div class="user-profile">
-                    <img src="./assets/img/default-avatar.png" alt="User" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%232563eb%22/%3E%3Ctext x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2240%22 font-family=%22Arial%22%3EDR%3C/text%3E%3C/svg%3E'">
-                    <span class="user-name">dr. User</span>
-                </div>
+            <div class="user-profile">
+                <img src="ASSETS_PATH/img/avatar.png" alt="User" 
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%230891b2%22/%3E%3Ctext x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2240%22%3EDR%3C/text%3E%3C/svg%3E'">
+                <span class="user-name">dr. User</span>
             </div>
         </div>
-    </header>
+    </div>
+</header>
+
 
     <!-- Quick Stats Section -->
     <section class="quick-stats">

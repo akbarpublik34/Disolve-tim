@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poin & Gamifikasi - JKN Medical Hub</title>
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+</head>
+<body>
+     <header class="main-header">
+    <div class="container">
+        <div class="logo-section">
+            <h1>JKN Medical Hub</h1>
+            <span class="version-badge">v2.0</span>
+        </div>
+        <nav class="main-nav">
+            <a href="/" id="nav-dashboard">Dashboard</a>
+            <a href="addCase.html" id="nav-addcase">Tambah Kasus</a>
+            <a href="queue.html" id="nav-queue">Antrean</a>
+            <a href="claims.html" id="nav-claims">Klaim</a>
+            <a href="analytics.html" id="nav-analytics">Analitik</a>
+        </nav>
+        <div class="user-section">
+            <div class="notification-bell" id="notifBell">
+                <span>🔔</span>
+                <span class="notification-badge" id="notifCount">0</span>
+            </div>
+            <div class="user-profile">
+                <img src="ASSETS_PATH/img/avatar.png" alt="User" 
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%230891b2%22/%3E%3Ctext x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2240%22%3EDR%3C/text%3E%3C/svg%3E'">
+                <span class="user-name">dr. User</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+  <main class="container main-content">
+    <section class="gamification-section">
+      <h2>Poin Dokter</h2>
+      <div class="points-card">
+        <h3>Skor Anda: <span id="userPoints">0</span> 🏆</h3>
+        <p>Tingkatkan dengan menambah kasus baru dan menyelesaikan klaim.</p>
+      </div>
+      <h3>Papan Peringkat</h3>
+      <ul id="leaderboard" class="leaderboard"></ul>
+    </section>
+  </main>
+
+  <script src="../assets/js/storageHelper.js"></script>
+  <script>
+    const points = localStorage.getItem('points') || 125;
+    const leaderboard = [
+      { name: 'dr. Siti', points: 180 },
+      { name: 'dr. Budi', points: 150 },
+      { name: 'dr. User', points: points }
+    ];
+
+    document.getElementById('userPoints').textContent = points;
+    document.getElementById('leaderboard').innerHTML = leaderboard
+      .map((d, i) => `<li>${i + 1}. ${d.name} — ${d.points} pts</li>`)
+      .join('');
+  </script>
+</body>
+</html>
